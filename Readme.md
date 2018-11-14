@@ -2,7 +2,7 @@
 
 * Студент: [Валерия Михеева](https://up.htmlacademy.ru/php/7/user/394677).
 * 
-Наставник: `Олег Головахин`(https://htmlacademy.ru/profile/id849005).
+Наставник:`Олег Головахин`(https://htmlacademy.ru/profile/id849005).
 
 ---
 
