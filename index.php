@@ -57,9 +57,58 @@ $user_avatar = 'img/user.jpg';
                 горнолыжное снаряжение.</p>
             <ul class="promo__list">
                 <!--заполните этот список из массива категорий-->
-                <li class="promo__item promo__item--boards">
-                    <a class="promo__link" href="pages/all-lots.html">Имя категории</a>
-                </li>
+                <?php
+                $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
+                $promo_list = [
+                    0 => [
+                        'title' => 'Доски и лыжи',
+                        'appellation' => '2014 Rossignol District Snowboard',
+                        'price' => '10999',
+                        'url' => 'img/lot-1.jpg'
+                    ],
+                    1 => [
+                        'title' => 'Доски и лыжи',
+                        'appellation' => 'DC Ply Mens 2016/2017 Snowboard',
+                        'price' => '159999',
+                        'url' => 'img/lot-1.jpg'
+                    ],
+                    2 => [
+                        'title' => 'Крепления',
+                        'appellation' => 'Крепления Union Contact Pro 2015 года размер L/XL',
+                        'price' => '8000',
+                        'url' => 'img/lot-3.jpg'
+                    ],
+                    3 => [
+                        'title' => 'Ботинки',
+                        'appellation' => 'Ботинки для сноуборда DC Mutiny Charocal',
+                        'price' => '10999',
+                        'url' => 'img/lot-4.jpg'
+                    ],
+                    4 => [
+                        'title' => 'Одежда',
+                        'appellation' => 'Куртка для сноуборда DC Mutiny Charocal',
+                        'price' => '7500',
+                        'url' => 'img/lot-5.jpg'
+                    ],
+
+                    5 => [
+                        'title' => 'Разное',
+                        'appellation' => 'Маска Oakley Canopy',
+                        'price' => '5400',
+                        'url' => 'img/lot-6.jpg'
+                    ]
+                ];
+                $value = count($categories);
+                $count = 0;
+                $value2 = count($promo_list);
+                $count2 = 0;
+                ?>
+                <?php while ($count < $value): ?>
+                    <li class="promo__item promo__item--boards">
+                        <a class="promo__link" href="pages/all-lots.html"><?= $categories[$count]; ?></a>
+                    </li>
+                    <?php $count++; ?>
+                <?php endwhile; ?>
             </ul>
         </section>
         <section class="lots">
@@ -68,24 +117,27 @@ $user_avatar = 'img/user.jpg';
             </div>
             <ul class="lots__list">
                 <!--заполните этот список из массива с товарами-->
-                <li class="lots__item lot">
-                    <div class="lot__image">
-                        <img src="" width="350" height="260" alt="">
-                    </div>
-                    <div class="lot__info">
-                        <span class="lot__category">Название категории</span>
-                        <h3 class="lot__title"><a class="text-link" href="pages/lot.html">Название товара</a></h3>
-                        <div class="lot__state">
-                            <div class="lot__rate">
-                                <span class="lot__amount">Стартовая цена</span>
-                                <span class="lot__cost">цена<b class="rub">р</b></span>
-                            </div>
-                            <div class="lot__timer timer">
-                                12:23
+                <?php while ($count2 < $value2): ?>
+                    <li class="lots__item lot">
+                        <div class="lot__image">
+                            <img src="<?= $promo_list[$count2]['url']; ?>" width="350" height="260" alt="">
+                        </div>
+                        <div class="lot__info">
+                            <span class="lot__category"><?= $promo_list[$count2]['title']; ?></span>
+                            <h3 class="lot__title"><a class="text-link" href="pages/lot.html"><?= $promo_list[$count2]['appellation']; ?></a></h3>
+                            <div class="lot__state">
+                                <div class="lot__rate">
+                                    <span class="lot__amount"><?= $promo_list[$count2]['price']; ?></span>
+                                    <span class="lot__cost">цена<b class="rub">р</b></span>
+                                </div>
+                                <div class="lot__timer timer">
+                                    12:23
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                    <?= $count2++; ?>
+                <?php endwhile; ?>
             </ul>
         </section>
     </main>
@@ -95,9 +147,12 @@ $user_avatar = 'img/user.jpg';
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-            <li class="nav__item">
-                <a href="pages/all-lots.html">Название категории</a>
-            </li>
+            <?php while ($count < $value): ?>
+                <li class="nav__item">
+                    <a href="pages/all-lots.html"><?= $categories[$count]; ?></a>
+                </li>
+                <?php $count++; ?>
+            <?php endwhile; ?>
         </ul>
     </nav>
     <div class="main-footer__bottom container">
