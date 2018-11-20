@@ -47,14 +47,10 @@ $promo_list = [
 function formatted_price($last_price)
 {
     $round_price = ceil($last_price);
-    if ($round_price > 1000) {
-        $formatted_amount = number_format($round_price, 0, ',', ' ');
-        $formatted_amount .= ' ₽';
-        return $formatted_amount;
-    }
-    return $round_price;
+    $formatted_amount = number_format($round_price, 0, ',', ' ');
+    $formatted_amount .= ' ₽';
+    return $formatted_amount;
 }
-
 ;
 ?>
 <!DOCTYPE html>
