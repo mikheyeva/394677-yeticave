@@ -5,19 +5,19 @@ $user_avatar = 'img/user.jpg';
 
 $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
 $promo_list = [
-     [
+    [
         'title' => 'Доски и лыжи',
         'appellation' => '2014 Rossignol District Snowboard',
         'price' => '10999',
         'url' => 'img/lot-1.jpg'
     ],
-     [
+    [
         'title' => 'Доски и лыжи',
         'appellation' => 'DC Ply Mens 2016/2017 Snowboard',
         'price' => '159999',
         'url' => 'img/lot-1.jpg'
     ],
-     [
+    [
         'title' => 'Крепления',
         'appellation' => 'Крепления Union Contact Pro 2015 года размер L/XL',
         'price' => '8000',
@@ -29,14 +29,14 @@ $promo_list = [
         'price' => '10999',
         'url' => 'img/lot-4.jpg'
     ],
-     [
+    [
         'title' => 'Одежда',
         'appellation' => 'Куртка для сноуборда DC Mutiny Charocal',
         'price' => '7500',
         'url' => 'img/lot-5.jpg'
     ],
 
-     [
+    [
         'title' => 'Разное',
         'appellation' => 'Маска Oakley Canopy',
         'price' => '5400',
@@ -44,6 +44,18 @@ $promo_list = [
     ]
 ];
 
+function formatted_price($last_price)
+{
+    $round_price = ceil($last_price);
+    if ($round_price > 1000) {
+        $formatted_amount = number_format($round_price, 0, ',', ' ');
+        $formatted_amount .= ' ₽';
+        return $formatted_amount;
+    }
+    return $round_price;
+}
+
+;
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -98,7 +110,7 @@ $promo_list = [
                 горнолыжное снаряжение.</p>
             <ul class="promo__list">
                 <!--заполните этот список из массива категорий-->
-                <?php foreach($categories as $category): ?>
+                <?php foreach ($categories as $category): ?>
                     <li class="promo__item promo__item--boards">
                         <a class="promo__link" href="pages/all-lots.html"><?= $category; ?></a>
                     </li>
@@ -118,12 +130,14 @@ $promo_list = [
                         </div>
                         <div class="lot__info">
                             <span class="lot__category"><?= $promo['title']; ?></span>
-                            <h3 class="lot__title"><a class="text-link"
-                                                      href="pages/lot.html"><?= $promo['appellation']; ?></a>
+                            <h3 class="lot__title">
+                                <a class="text-link" href="pages/lot.html"><?= $promo['appellation']; ?></a>
                             </h3>
                             <div class="lot__state">
                                 <div class="lot__rate">
-                                    <span class="lot__amount"><?= $promo['price']; ?></span>
+                                    <span class="lot__amount">
+                                        <?= formatted_price($promo['price']); ?>
+                                    </span>
                                     <span class="lot__cost">цена<b class="rub">р</b></span>
                                 </div>
                                 <div class="lot__timer timer">
