@@ -36,7 +36,6 @@
                         </div>
                         <div class="lot__timer timer">
                             <?= $formatted_time; ?>
-                            <!--                            12:23-->
                         </div>
                     </div>
                 </div>
