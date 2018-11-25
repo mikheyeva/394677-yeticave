@@ -35,7 +35,7 @@
                             <span class="lot__cost">цена<b class="rub">р</b></span>
                         </div>
                         <div class="lot__timer timer">
-                            12:23
+                            <?= $formatted_time; ?>
                         </div>
                     </div>
                 </div>

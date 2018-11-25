@@ -1,11 +1,20 @@
 <?php
 require('functions.php');
+
+date_default_timezone_set('europe/moscow');
+
 $title = 'Главная';
 
 $is_auth = rand(0, 1);
 $user_name = 'Имяпользователя'; // укажите здесь ваше имя
 $user_name = htmlspecialchars($user_name);
 $user_avatar = 'img/user.jpg';
+
+$end_of_auction = strtotime('midnight tomorrow');
+$diff = $end_of_auction - time();
+$hours = floor($diff / 3600);
+$minutes = floor(($diff % 3600) / 60);
+$formatted_time = $hours . ':' . $minutes;
 
 $categories = ['Доски и лыжи', 'Крепления', 'Ботинки', 'Одежда', 'Инструменты', 'Разное'];
 $promo_list = [
@@ -51,6 +60,7 @@ $promo_list = [
 $index_list = [
     'categories' => $categories,
     'promo_list' => $promo_list,
+    'formatted_time' => $formatted_time,
 ];
 
 $index_data = include_template('index.php', $index_list);
