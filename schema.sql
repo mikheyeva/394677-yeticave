@@ -34,8 +34,6 @@ PRIMARY KEY (`id`),
 
 CREATE TABLE users(
 `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
-`created_lots_id` INT(11) unsigned NOT NULL,
-`wager_id` INT(11) unsigned NOT NULL,
 `dt_add` timestamp default current_timestamp NOT NULL,
 `email` char (128) NOT NULL,
 `name` char (255) NOT NULL,
