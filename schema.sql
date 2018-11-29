@@ -20,10 +20,7 @@ CREATE TABLE lots(
 `start-price`  INT unsigned NOT NULL,
 `dt_finish` timestamp default current_timestamp NOT NULL,
 `bet_step` INT unsigned NOT NULL,
-PRIMARY KEY (`id`),
-UNIQUE KEY `author_id` (`author_id`),
-UNIQUE KEY `winner_id` (`winner_id`),
-UNIQUE KEY `category_id` (`category_id`)
+PRIMARY KEY (`id`)
 );
 
 CREATE TABLE wager(
@@ -33,8 +30,6 @@ CREATE TABLE wager(
 `dt_placing` timestamp default current_timestamp NOT NULL,
 `user_amount` INT unsigned NOT NULL,
 PRIMARY KEY (`id`),
-UNIQUE KEY `user_id` (`user_id`),
-UNIQUE KEY `lot_id` (`lot_id`)
 )
 
 CREATE TABLE users(
@@ -47,10 +42,7 @@ CREATE TABLE users(
 `password` char(64) NOT NULL,
 `avatar_path` char(255),
 `token` char(32),
-PRIMARY KEY (`id`),
-UNIQUE KEY `created_lots_id` (`created_lots_id`),
-UNIQUE KEY `wager_id` (`wager_id`),
-UNIQUE KEY `email` (`email`)
+PRIMARY KEY (`id`)
 );
 
 
