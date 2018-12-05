@@ -21,23 +21,37 @@ INSERT INTO `wager` (`user_id`, `lot_id`, `user_amount`)
 VALUES
 ('1', '3', '8300'),
 ('1', '3', '8600');
+
+
 -- получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, название категории;
--- Нет цены, не знаю где брать, есть только начальная
-SELECT l.`name`, `start-price`,`url-image`, c.`name` FROM lots l JOIN categories c ON l.category_id = c.id
-WHERE l.`winner_id` IS NULL
+SELECT l.`name`, `start-price`,`url-image`, MAX(w.`user_amount`), c.`name`
+FROM lots l
+JOIN categories c
+ON l.category_id = c.id
+JOIN wager w
+ON w.`lot_id` = l.`id`
+GROUP BY w.`lot_id`
+
 
 -- показать лот по его id. Получите также название категории, к которой принадлежит лот
-SELECT l.`name`, `startprice`,`url-image`, c.`name` FROM lots l JOIN categories c ON l.category_id = c.id
+SELECT l.`name`, `start-price`,`url-image`, c.`name`
+FROM lots l
+JOIN categories c
+ON l.category_id = c.id
 WHERE l.`id` = '2'
+
+
 -- обновить название лота по его идентификатору;
--- Не поняла что имело в виду, просто замениало id
-SELECT l.`name`, `start-price`,`url-image`, c.`name` FROM lots l JOIN categories c ON l.category_id = c.id WHERE l.`id` = '4'
+UPDATE lots
+SET `name` = 'Ботинки для сноуборда'
+WHERE `id` = '3'
 
 -- получить список самых свежих ставок для лота по его идентификатору
-SELECT l.`name`, `start-price`,`url-image`, c.`name`, `lot_id`, `user_amount`
+SELECT l.`name`, `start-price`,`url-image`, c.`name`, `lot_id`, `user_amount`, `dt_placing`
 FROM lots l
 JOIN categories c
 ON l.category_id = c.id
 JOIN wager w
 ON w.`lot_id` = l.`id`
 WHERE `lot_id` = '3'
+ORDER BY `dt_placing`
