@@ -12,8 +12,9 @@ UNIQUE KEY `name` (`name`)
 CREATE TABLE lots(
 `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
 `author_id` INT unsigned NOT NULL,
-`winner_id` INT unsigned NOT NULL,
+`winner_id` INT unsigned,
 `category_id` INT unsigned NOT NULL,
+`dt_creation` timestamp default current_timestamp NOT NULL,
 `name` char (255) NOT NULL,
 `description` text,
 `url-image` char (255),
@@ -29,8 +30,8 @@ CREATE TABLE wager(
 `lot_id` INT(11) unsigned NOT NULL,
 `dt_placing` timestamp default current_timestamp NOT NULL,
 `user_amount` INT unsigned NOT NULL,
-PRIMARY KEY (`id`),
-)
+PRIMARY KEY (`id`)
+);
 
 CREATE TABLE users(
 `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
