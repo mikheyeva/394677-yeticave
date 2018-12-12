@@ -5,6 +5,10 @@
     <title><?= $title; ?></title>
     <link href="css/normalize.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <?php $link = mysqli_connect('localhost', 'root', '', 'yeticave')
+    or die("Ошибка" . mysqli_error($link));
+    mysqli_set_charset($link, "utf8")
+    ?>
 </head>
 <body>
 <div class="page-wrapper">
@@ -53,9 +57,14 @@
     <nav class="nav">
         <ul class="nav__list container">
             <!--заполните этот список из массива категорий-->
-            <?php foreach ($categories as $category): ?>
+            <?php
+            $sql_2 = "SELECT categories_name FROM categories";
+            $result = mysqli_query($link, $sql_2);
+            $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+            foreach ($categories as $category): ?>
                 <li class="nav__item">
-                    <a href="pages/all-lots.html"><?= $category; ?></a>
+                    <a href="pages/all-lots.html"><?= $category ['categories_name']; ?></a>
                 </li>
             <?php endforeach; ?>
         </ul>

@@ -4,9 +4,9 @@ DEFAULT COLLATE utf8_general_ci
 
 CREATE TABLE categories(
 `id` INT(11) unsigned NOT NULL AUTO_INCREMENT,
-`name` char (255) NOT NULL,
+`categories_name` char (255) NOT NULL,
 PRIMARY KEY (`id`),
-UNIQUE KEY `name` (`name`)
+UNIQUE KEY `categories_name` (`categories_name`)
 );
 
 CREATE TABLE lots(
@@ -17,8 +17,8 @@ CREATE TABLE lots(
 `dt_creation` timestamp default current_timestamp NOT NULL,
 `name` char (255) NOT NULL,
 `description` text,
-`url-image` char (255),
-`start-price`  INT unsigned NOT NULL,
+`url_image` char (255),
+`start_price`  INT unsigned NOT NULL,
 `dt_finish` timestamp default current_timestamp NOT NULL,
 `bet_step` INT unsigned NOT NULL,
 PRIMARY KEY (`id`)
