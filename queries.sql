@@ -1,4 +1,4 @@
-INSERT INTO `categories` (`name`)
+INSERT INTO `categories` (`categories_name`)
 VALUES ('Доски и лыжи'), ('Крепления'), ('Ботинки'), ('Одежда'), ('Инструменты'), ('Разное');
 
 INSERT INTO `users` (`email`, `name`, `password`, `avatar_path`, `token`)
@@ -8,7 +8,7 @@ VALUES
 
 
 
-INSERT INTO `lots` (`author_id`, `winner_id`, `category_id`, `name`, `description`,`url-image`, `start-price`, `bet_step`)
+INSERT INTO `lots` (`author_id`, `winner_id`, `category_id`, `name`, `description`,`url_image`, `start_price`, `bet_step`)
 VALUES
 ('1', '2','1', '2014 Rossignol District Snowboard', NULL, 'img/lot-1.jpg', '10999', '1000' ),
 ('1', '2', '1', 'DC Ply Mens 2016/2017 Snowboard', NULL, 'img/lot-1.jpg', '10999', '500'),
@@ -24,7 +24,7 @@ VALUES
 
 
 -- получить самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену, ссылку на изображение, цену, название категории;
-SELECT l.`name`, `start-price`,`url-image`, MAX(w.`user_amount`), c.`name`
+SELECT l.`name`, `start_price`,`url_image`, MAX(w.`user_amount`), categories_name
 FROM lots l
 JOIN categories c
 ON l.category_id = c.id
@@ -34,7 +34,7 @@ GROUP BY w.`lot_id`
 
 
 -- показать лот по его id. Получите также название категории, к которой принадлежит лот
-SELECT l.`name`, `start-price`,`url-image`, c.`name`
+SELECT l.`name`, `start_price`,`url_image`, categories_name
 FROM lots l
 JOIN categories c
 ON l.category_id = c.id
@@ -47,7 +47,7 @@ SET `name` = 'Ботинки для сноуборда'
 WHERE `id` = '3'
 
 -- получить список самых свежих ставок для лота по его идентификатору
-SELECT l.`name`, `start-price`,`url-image`, c.`name`, `lot_id`, `user_amount`, `dt_placing`
+SELECT l.`name`, `start_price`,`url_image`, c.`name`, `lot_id`, `user_amount`, `dt_placing`
 FROM lots l
 JOIN categories c
 ON l.category_id = c.id
