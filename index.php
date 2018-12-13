@@ -18,7 +18,9 @@ $end_of_auction = strtotime('midnight tomorrow');
 $diff = $end_of_auction - time();
 $hours = floor($diff / 3600);
 $minutes = floor(($diff % 3600) / 60);
-$formatted_time = $hours . ':' . $minutes;
+$minutes < 10 ? $formatted_time = $hours . ':' . '0'.$minutes : $formatted_time = $hours . ':' . $minutes;
+//$formatted_time = $hours . ':' . $minutes;
+
 
 $sql = "SELECT l.`name`, `start_price`,`url_image`, `categories_name`
 FROM lots l
