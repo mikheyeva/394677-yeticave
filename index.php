@@ -38,18 +38,6 @@ $index_list = [
     'lots' => $lots
 ];
 
-
-
-if (isset ($_GET['id'])){
-    $_GET['id'] = htmlspecialchars($promo['id']);
-    $url = http_build_query($_GET);
-}
-else {
-    return response(view('test'), 404);
-}
-
-
-
 $index_data = include_template('index.php', $index_list);
 echo include_template('layout.php', [
     'content' => $index_data,
@@ -58,7 +46,6 @@ echo include_template('layout.php', [
     'is_auth' => $is_auth,
     'user_name' => $user_name,
     'link' => $link,
-    'url' => $url,
 ]);
 
 
