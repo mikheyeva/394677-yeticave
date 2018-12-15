@@ -26,7 +26,7 @@
                 <div class="lot__info">
                     <span class="lot__category"><?= htmlspecialchars($promo['categories_name']); ?></span>
                     <h3 class="lot__title">
-                        <a class="text-link" href="lot.php?id= <?= $promo['id'] ?>"><?= htmlspecialchars($promo['name']); ?></a>
+                        <a class="text-link" href="lot.php?id=<?= $promo['id'] ?>"><?= htmlspecialchars($promo['name']); ?></a>
                     </h3>
                     <div class="lot__state">
                         <div class="lot__rate">

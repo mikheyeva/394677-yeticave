@@ -39,6 +39,8 @@ $index_list = [
 ];
 
 $index_data = include_template('index.php', $index_list);
+
+
 echo include_template('layout.php', [
     'content' => $index_data,
     'title' => $title,
