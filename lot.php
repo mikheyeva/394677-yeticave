@@ -28,11 +28,11 @@ $sql = "SELECT l.`name`, `url_image`, categories_name, l.`id`, `description`, `b
 FROM lots l
 JOIN categories c
 ON l.category_id = c.id
-WHERE l.`id` = '" . $lotId . "'";
+WHERE l.`id` = '" . (int)$lotId . "'";
 
 $sql2 = "SELECT max(user_amount) as amount
 FROM wager
-WHERE lot_id = '" . $lotId . "'";
+WHERE lot_id = '" . (int)$lotId . "'";
 
 $lot = null;
 $result = mysqli_query($link, $sql);
@@ -63,11 +63,20 @@ if (!empty($max_amount)) {
 //echo '</pre>';
 //die();
 
-echo include_template('lot.php', [
+$lot_data = include_template('lot.php', [
     'categories' => $categories,
     'sql' => $sql,
     'lot' => $lot,
     'formatted_time' => $formatted_time,
     'max_amount' => $max_amount,
     'current_price' => $current_price,
+]);
+
+echo include_template('layout.php', [
+    'content' => $lot_data,
+    'title' => $title,
+    'categories' => $categories,
+    'is_auth' => $is_auth,
+    'user_name' => $user_name,
+    'link' => $link,
 ]);
