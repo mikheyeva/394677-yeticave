@@ -63,8 +63,8 @@ $add_lot = [
 //    'lot_date' => $lot_date
 ];
 
-foreach ($add_lot as $lot){
-    if (isset ($lot)){
+
+    if (isset ($add_lot)){
         $sql_form = mysqli_query($link, "INSERT INTO `lots` l (`name`, `categories_name`, `description`,`url_image`,`start_price`, `bet_step` ) VALUES ($lot) JOIN categories c
 ON l.category_id = c.id");
         if ($sql_form) {
@@ -72,9 +72,11 @@ ON l.category_id = c.id");
         } else {
             $answer = 'Пожалуйста, исправьте ошибки в форме';
         }
-    }
-};
+    };
 
+//echo '<pre>';
+//var_dump($add_lot);
+//echo '</pre>';
 //if (isset($_POST['lot-name']) && isset($_POST['message']) && isset($_POST['lot-rate']) && isset($_POST['lot-step']) && isset($_POST['lot-date']) && isset($_POST['lot-rate']) && isset($_POST['photo'])) {
 //    $sql_form = mysqli_query($link, "INSERT INTO `lots` (`name`, `description`,`url_image`, `start_price`, `bet_step`) VALUES ('{$_POST['lot-name']}', '{$_POST['message']}' ,
 //'{$_POST['photo']}' , '$start_price' , '$bet_step')");
@@ -86,9 +88,7 @@ ON l.category_id = c.id");
 //    }
 //}
 //
-//echo '<pre>';
-//var_dump($form_errors);
-//echo '</pre>';
+
 
 
 $path = '/img';
