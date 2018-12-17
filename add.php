@@ -17,46 +17,95 @@ $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
 //    echo '</pre>';
 //}
 
-$form_errors = [];
+//$form_errors = [];
 
-if (!empty($_POST)) {
-    if (!empty($_POST['lot-name']) && !empty($_POST['category']) && !empty($_POST['message']) && !empty($_POST['lot-rate']) && !empty($_POST['lot-step']) && !empty($_POST['lot-date'])) {
-        // запись в базу
-    } else {
-        if (empty($_POST['lot-name'])) {
-            $form_errors['lot-name'] = true;
-        }
-        if (empty($_POST['category'])) {
-            $form_errors['category'] = true;
-        }
-        if (empty($_POST['message'])) {
-            $form_errors['message'] = true;
-        }
-        if (empty($_POST['lot-rate'])) {
-            $form_errors['lot-rate'] = true;
-        }
-        if (empty($_POST['lot-step'])) {
-           $form_errors['lot-step'] = true;
-        }
-        if (empty($_POST['lot-date'])) {
-            $form_errors['lot-date'] = true;
+//if (!empty($_POST)) {
+//    if (!empty($_POST['lot-name']) && !empty($_POST['category']) && !empty($_POST['message']) && !empty($_POST['lot-rate']) && !empty($_POST['lot-step']) && !empty($_POST['lot-date'])) {
+//        // запись в базу
+//    } else {
+//        if (empty($_POST['lot-name'])) {
+//            $form_errors['lot-name'] = true;
+//        }
+//        if (empty($_POST['category'])) {
+//            $form_errors['category'] = true;
+//        }
+//        if (empty($_POST['message'])) {
+//            $form_errors['message'] = true;
+//        }
+//        if (empty($_POST['lot-rate'])) {
+//            $form_errors['lot-rate'] = true;
+//        }
+//        if (empty($_POST['lot-step'])) {
+//           $form_errors['lot-step'] = true;
+//        }
+//        if (empty($_POST['lot-date'])) {
+//            $form_errors['lot-date'] = true;
+//        }
+//    }
+//}
+
+
+$lot_name = mysqli_real_escape_string($link, $_POST['lot-name']);
+$category = mysqli_real_escape_string($link, $_POST['category']);
+$description = mysqli_real_escape_string($link, $_POST['message']);
+$url_image = mysqli_real_escape_string($link, $_POST['photo']);
+$start_price = intval($_POST['lot-rate']);
+$bet_step = intval($_POST['lot-step']);
+$lot_date = mysqli_real_escape_string($link, $_POST['lot-date']);
+
+$add_lot = [
+    'lot_name' => $lot_name,
+    'category' => $category,
+    'description' => $description,
+    'url_image' => $url_image,
+    'start_price' => $start_price,
+    'bet_step' => $bet_step,
+//    'lot_date' => $lot_date
+];
+
+foreach ($add_lot as $lot){
+    if (isset ($lot)){
+        $sql_form = mysqli_query($link, "INSERT INTO `lots` l (`name`, `categories_name`, `description`,`url_image`,`start_price`, `bet_step` ) VALUES ($lot) JOIN categories c
+ON l.category_id = c.id");
+        if ($sql_form) {
+            $answer = 'Новый лот добавлен';
+        } else {
+            $answer = 'Пожалуйста, исправьте ошибки в форме';
         }
     }
-}
+};
 
-if (isset($_POST["lot-name"])&& isset($_POST["message"]) && isset($_POST["lot-rate"]) && isset($_POST["lot-step"]) && isset($_POST["lot-date"]) && isset($_POST["lot-rate"]) && isset($_POST["photo"])) {
-    $sql_form = mysqli_query($link, "INSERT INTO `lots` (`name`, `description`,`url_image`, `start_price`, `bet_step`) VALUES ('{$_POST['lot-name']}', '{$_POST['message']}' , 
-'{$_POST['photo']}' , '{$_POST['lot-rate']}' , '{$_POST['lot-step']}')");
-    if ($sql_form) {
-        echo '<p>Данные успешно добавлены в таблицу.</p>';
-    } else {
-        echo '<p>Произошла ошибка: ' . mysqli_error($link) . '</p>';
-    }
-}
+//if (isset($_POST['lot-name']) && isset($_POST['message']) && isset($_POST['lot-rate']) && isset($_POST['lot-step']) && isset($_POST['lot-date']) && isset($_POST['lot-rate']) && isset($_POST['photo'])) {
+//    $sql_form = mysqli_query($link, "INSERT INTO `lots` (`name`, `description`,`url_image`, `start_price`, `bet_step`) VALUES ('{$_POST['lot-name']}', '{$_POST['message']}' ,
+//'{$_POST['photo']}' , '$start_price' , '$bet_step')");
+//    if ($sql_form) {
+//        $success = 'Новый лот добавлен';
+//    } else {
+//        $failure = 'Пожалуйста, исправьте ошибки в форме';
+//        $success = $failure;
+//    }
+//}
 //
 //echo '<pre>';
 //var_dump($form_errors);
 //echo '</pre>';
+
+
+$path = '/img';
+
+if (isset($_FILES['photo'])) {
+    // проверяем, можно ли загружать изображение
+    $check = can_upload($_FILES['photo']);
+
+    if ($check === true) {
+        // загружаем изображение на сервер
+        make_upload($_FILES['photo']);
+        echo "<strong>Файл успешно загружен!</strong>";
+    } else {
+        // выводим сообщение об ошибке
+        echo "<strong>$check</strong>";
+    }
+}
 
 $lot_data = include_template('add.php', [
     'categories' => $categories,
@@ -70,4 +119,6 @@ echo include_template('layout.php', [
     'is_auth' => $is_auth,
     'user_name' => $user_name,
     'link' => $link,
+    'success' => $success,
+    'failure' => $failure,
 ]);

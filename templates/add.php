@@ -37,7 +37,7 @@
         <div class="form__item form__item--file"> <!-- form__item--uploaded -->
             <label>Изображение</label>
             <div class="preview">
-                <button class="preview__remove" type="button">x</button>
+                <button  class="preview__remove" type="button">x</button>
                 <div class="preview__img">
                     <img src="img/avatar.jpg" width="113" height="113" alt="Изображение лота">
                 </div>
@@ -66,7 +66,7 @@
                 <span class="form__error">Введите дату завершения торгов</span>
             </div>
         </div>
-        <span class="form__error form__error--bottom">Пожалуйста, исправьте ошибки в форме.</span>
+        <span class="form__error form__error--bottom"><?= $answer;?>.</span>
         <button type="submit" class="button">Добавить лот</button>
     </form>
 </main>
