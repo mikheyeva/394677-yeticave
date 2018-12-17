@@ -65,7 +65,7 @@ $add_lot = [
 
 
 if (isset ($add_lot)) {
-    $sql_form = mysqli_query($link, "INSERT INTO `lots` l (`name`, `categories_name`, `description`,`url_image`,`start_price`, `bet_step` ) VALUES " . implode(',', $add_lot) . " JOIN categories c
+    $sql_form = mysqli_query($link, "INSERT INTO `lots` l (`name`, `categories_name`, `description`,`url_image`,`start_price`, `bet_step` ) VALUES " . implode('","', $add_lot) . " JOIN categories c
 ON l.category_id = c.id");
     if ($sql_form) {
         $answer = 'Новый лот добавлен';
